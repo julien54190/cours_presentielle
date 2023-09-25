@@ -1,0 +1,26 @@
+@keyframes animationimg{
+    0%{
+        transform: scaleX(1);
+    }
+    50%{
+        transform: scaleX(-1);
+    }
+    100%{
+        transform: scaleX(1);
+    }
+}
+
+img{
+    border: 3px dashed #008000;
+    border-radius: 25px;
+    opacity: .6;
+    height: 50%;
+    max-width: 100%;
+    filter: blur(2px);
+    filter: contrast(50%);
+    animation: animationimg 3.5s ease-out infinite;
+}
+
+img:hover{
+    transform: scaleX(-1);
+}

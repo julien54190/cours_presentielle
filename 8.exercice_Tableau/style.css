@@ -1,0 +1,68 @@
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table{
+    width: 70%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+thead th, tfoot th{
+    background-color: #005500;
+    color: white;
+    font-size: 2em;
+    padding: 5px 0 5px 0;
+}
+
+*{
+    text-align: center;
+}
+
+
+td img, td span{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+td img{
+    padding-right: 10px;
+}
+
+td:nth-child(2){
+    text-align: left;
+}
+
+td:first-child, tbody tr th{
+    background-color: black;
+    color: #FCFEFE;
+    font-size: 1.3em;
+    font-weight: 600;
+    padding: 5px 0 5px 0;
+    text-align: center;
+}
+
+.hover{
+    background-color: rgb(246, 224, 75);
+    padding: 0 4px ;
+    font-weight: 700;
+}
+
+tr:hover .hover,tr:hover{
+    background-color: gray;
+    color: #FFF;
+    font-weight: 700;
+}
+
+tr:hover .hover{
+    color: blue;
+}
+
+td:first-child{
+    padding: 15px 7px 15px 7px;
+}
+
+
+
+
+

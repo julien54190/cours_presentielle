@@ -1,0 +1,228 @@
+@font-face {
+    font-family: sourceSansPro;
+    src: url(source-sans-pro.light.ttf);
+}
+
+.container{
+    background-color: black;
+    height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* justify-content joue avec la largeur quand flex- direction est en row et sur la hauteur qiant il est en column */
+    align-items: center;
+    /* align-itmes fait la meme chose que justify-content mais en inversé donc il joue avec la hauteur quand flex-direction est en row et sur la largeur quand il est en column */
+    align-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*  le flex-wrap sert a remettre à la ligne quand les éléments n'ont plus de place sur la largeur quand il est en wrap
+    (mode par defaut nowrap */
+}
+
+.rouge{
+    background-color: green;
+    width: 10%;
+    height: 100px;
+    border: 2px solid black;
+}
+
+.vert{
+    background-color: white;
+    width: 10%;
+    height: 100px;
+    border: 2px solid black;
+}
+
+.orange{
+    background-color: red;
+    width: 10%;
+    height: 100px;
+    border: 2px solid black;
+}
+
+/*  exercice - 1 */
+
+.grand{
+    background-color: darkgray;
+    width: 75%;
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+
+}
+
+.petit{
+    background-color: aquamarine;
+    width: 45%;
+    height: 90%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.petit h1{
+    color: darkgrey;
+    font-size: 3em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 15px;
+}
+
+#second_petit{
+    background-color: transparent;
+    align-content: space-between;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.moyen{
+    width: 100%;
+    height: 30%;
+    background-color: aquamarine;
+}
+
+.tout_petit{
+    width: 45%;
+    height: 30%;
+    background-color: aquamarine;
+}
+
+/* exercice - 2 */
+
+.violet{
+    background-color: violet;
+}
+
+.orangee{
+    background-color: orange;
+}
+
+.bleu{
+    background-color: aqua;
+}
+
+.red{
+    background-color: red;
+}
+
+.flexbox{
+    width: 70%;
+    height: 600px;
+    background-color: blueviolet;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.cote_gauche{
+    /* background-color: aqua; */
+    width: 40%;
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.long{
+    width: 100%;
+    height: 20%;
+}
+
+.cote_gauche .gauche{
+    width: 45%;
+    height: 75%;
+    /* background-color: beige; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cote_gauche .droite{
+    width: 45%;
+    height: 75%;
+}
+
+.cote_gauche .gauche .petite{
+    width: 100%;
+    height: 65%;
+}
+
+.cote_gauche .gauche .tres_petite{
+    width: 100%;
+    height: 30%;
+}
+
+.cote_droite{
+    /* background-color: aqua; */
+    width: 40%;
+    height: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cote_droite .gauche{
+    width: 45%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: beige; */
+
+}
+
+.cote_droite .droite{
+    width: 45%;
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: beige; */
+}
+
+.cote_droite .gauche .petite{
+    width: 100%;
+    height: 35%
+}
+
+.cote_droite .gauche .petite1{
+    width: 100%;
+    height: 20%
+}
+
+.cote_droite .gauche .petite2{
+    width: 100%;
+    height: 35%
+}
+.cote_droite .droite .petite{
+    width: 100%;
+    height: 40%;
+}
+
+.cote_droite .droite .petite1{
+    width: 100%;
+    height: 30%;
+}
+
+.cote_droite .droite .petite2{
+    width: 100%;
+    height: 25%;
+}
+
+.cote_droite .long{
+    height: 30%;
+}
+
+.flexbox h1{
+    display: block;
+    margin: 2px;
+    font-size: 7.5em;
+    color: white;
+    font-family: 'sourceSansPro'
+}
+
+

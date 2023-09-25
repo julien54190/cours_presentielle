@@ -1,0 +1,86 @@
+.container{
+    width: 40%;
+    height: 420px;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    margin: 0;
+    padding: 0;
+    border: 4px solid black;
+}
+
+/* .code{
+    width: 28%;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px 0 15px 0;
+} */
+
+button{
+    width: 23%; 
+    height: 60px;
+    border-style: none;
+    background-color: lightgrey;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px 5px 10px 5px;
+    padding-bottom: 10px;
+    
+}
+
+.button{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button{
+    font-weight: bold;
+    font-size: 1.75em;
+}
+
+button:nth-child(4){
+    text-decoration: underline;
+    text-decoration-color:red ;
+    text-decoration-thickness: 10px;
+    
+}
+
+button:nth-child(8){
+    text-decoration: underline;
+    text-decoration-color:yellow ;
+    text-decoration-thickness: 10px;
+    
+}
+
+button:nth-child(12){
+    text-decoration: underline;
+    text-decoration-color:green ;
+    text-decoration-thickness: 10px;
+    
+}
+
+#password{
+    width: 150px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 10px 0 15px 172px;
+    background-color: lightgrey;
+    font-size: 2.5em;
+    text-align: center;
+    
+
+    
+}
+
+button:hover{
+    background-color: black;
+    color: white;
+}
+
+
+
+
+

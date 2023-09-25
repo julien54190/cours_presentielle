@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Mom formulaire</legend>
+    <form action="`">
+        <label for="name"> Nom :</label>
+        <input type="text" name="name" id="name">
+        <br><br>
+        <label for="prénom">Prénom : </label>
+        <input type="text" name="prénom" id="prénom">
+        <br><br>
+        <label for="age">Age : </label>
+        <input type="number" name="age" id="age">
+        <br><br>
+        <input type="radio" name="sexe" id="masculin">
+        <label for="masculin">Masculin</label>
+        <br>
+        <input type="radio" name="sexe" id="féminin" checked>
+        <label for="féminin">Féminin</label>
+        <br><br>
+        <input type="checkbox" name="me" id="me">
+        <label for="me">Je suis moi ?</label>
+        <br><br>
+        <textarea name="message" id="message" cols="30" rows="10" placeholder="Taper votre message"></textarea>
+        <br><br>
+        <input type="submit" value="Envoyer !">
+    </form>
+</fieldset>
+    <br><br><br>
+
+    <h1>HTML FORM</h1>
+    <form action="">
+        <fieldset>
+            <legend>Formulaire HTML</legend>
+            <p>
+                <label for="name">First name</label>
+                <input type="text" name="name" id="name" placeholder=" votre nom">
+            </p>
+            <p>
+                <label for="lastname">Last name</label>
+                <input type="text" name="lastname" id="lastname" placeholder="votre nom de famille">
+            </p>
+            <p>
+                <label for="mail">E-mail</label>
+                <input type="email" name="mail" id="mail" placeholder="abcd@exemple.com">
+            </p>
+            <p>
+                <input type="radio" name="sexe" id="male">
+                <label for="male">Male</label>
+            </p>
+            <p>
+                <input type="radio" name="sexe" id="female">
+                <label for="female">Female</label>
+            </p>
+            <p>
+                <input type="submit" value="Submit" class="button">
+                <input type="reset" value="Reset" class="button">
+            </p>
+        </fieldset>
+    </form>
+    <br><br><br>
+    <form action="">
+        <fieldset>
+            <legend>
+                Selection option list
+            </legend>
+            <p>
+                <label for="checkbox">Checkbox:</label>
+                <input type="checkbox" name="checkbox" id="checkbox">
+            </p>
+            <p>
+                <label for="button1">RadioButton1:</label>
+                <input type="radio" name="button" id="button1">
+            </p>
+            <p>
+                <label for="button2">RadioButton2</label>
+                <input type="radio" name="button" id="button2" checked>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Input text</legend>
+            <p>
+            <label for="login">Login ID:</label>
+            <input type="text" name="login" id="login">
+        </p>
+        <p>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password">
+        </p>
+        </fieldset>
+        <fieldset>
+            <legend>Employee Designation</legend>
+            <p>
+                <input type="checkbox" name="software" id="software" checked>
+                <label for="software">Software Engineer</label>
+            </p>
+            <p>
+                <input type="checkbox" name="data" id="data">
+                <label for="data">Data Analyst</label>
+            </p>
+            <p>
+                <input type="checkbox" name="web" id="web">
+                <label for="web">Web Developpeur</label>
+            </p>
+            <p>
+                <input type="checkbox" name="senior" id="senior">
+                <label for="senior">Senior Analyst</label>
+            </p>
+    </fieldset>
+</form>
+<input type="submit" value="press" class="button">
+<input type="reset" value="Reset" class="button">
+</body>
+</html>
