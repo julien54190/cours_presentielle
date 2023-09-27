@@ -1,4 +1,10 @@
-<?php  require_once('../5.base_php/db.php') ?>
+<?php  require_once('../5.base_php/db.php');
+    session_start();
+    if (!empty($_SESSION)) header('Location: index.php');
+    if(!empty($_GET)) {
+        if($_GET['success'] == 'reset') echo '<script>alert("Votre mot de passe a été modifieé") </script>';
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,27 +19,28 @@
             <label for="User">Pseudo ou Mail :</label>
             <input type="text" name="User" id="User">
             <label for="password">Mot de passe :</label>
-            <input type="password" name="Password" id="Paswword">
+            <input type="password" name="Password" id="Password">
             <input type="submit" value="Se connecter">
+            <a href="forgotpassword.php">Mot de passe oublié ?</a>
             <a href="register.php">Vous n'avez pas de compte ?</a>
-        </pre>
+        </pre> 
+
     </form>
     <?php
     if (isset($_POST) && !empty($_POST)) {
-        $select = $bdd->prepare('SELECT * FROM Inscription WHERE (User = ? OR Mail = ?) AND Password = ?');
+        $select = $bdd->prepare('SELECT * FROM Inscription WHERE (User =:login OR Mail =:login) AND Password =:password');
         $select->execute(array(
-            $_POST['User'],
-            $_POST['User'],
-            sha1($_POST['Password'])
+            'login' => $_POST['User'],
+            'password' => sha1($_POST['Password'])
         ));
         $select = $select->fetch(PDO::FETCH_ASSOC);
         if(!empty($select)) {
-            session_start();
             $_SESSION = $select;
             header('location: index.php');
         } else{
             echo "<script>alert('Le mot de passe ou le pseudo n\'est pas bon')</script>";
         }
+        
     }
     ?>
 </body>
