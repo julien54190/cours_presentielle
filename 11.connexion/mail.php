@@ -11,8 +11,18 @@ function GenerateToken($length) {
     return substr(str_shuffle(str_repeat($token, $length)), 0, $length);
 }
 
-function SendEmail($id, $token, $email) {
-    function smtpmailer($to, $from, $from_name, $subject, $body) {
+/**
+ * Fonction envoie de mail
+ * @param string $email
+ * @param string $msg
+ * @param string $objet
+ * @param string $name
+ * @return void
+ */
+
+function SendEmail($email, $msg, $objet, $name) {
+        $from = "dwwm.auboue@hotmail.com";
+
         $mail = new PHPMailer();
         $mail -> isSMTP();
         $mail -> SMTPAuth = true;
@@ -25,13 +35,13 @@ function SendEmail($id, $token, $email) {
 
         $mail->isHTML();
         $mail->From = $from;
-        $mail->FromName = $from_name;
+        $mail->FromName = $name;
         $mail->Sender = $from;
-        $mail->addReplyTo($from, $from_name);
+        $mail->addReplyTo($from, $name);
         $mail->CharSet = 'UTF-8';
-        $mail->Subject = $subject;
-        $mail-> Body = $body;
-        $mail->addAddress($to);
+        $mail->Subject = $objet;
+        $mail-> Body = $msg;
+        $mail->addAddress($email);
         
 
         if(!$mail->Send()) {
@@ -40,9 +50,9 @@ function SendEmail($id, $token, $email) {
             echo "le mail c'est envoyé avec succès";
         }
 
-    }
-    $msg = "Lien pour reinitialiser votre mot de passe : http://localhost:8888/presentielle/11.connexion/reset.php?id=$id&token=$token";
-    smtpmailer($email, 'dwwm.auboue@hotmail.com', 'mot de passe', 'Rénitiallisez votre mot de passe  ', $msg);
+    
+    // $msg = "Lien pour reinitialiser votre mot de passe : http://localhost:8888/presentielle/11.connexion/reset.php?id=$id&token=$token";
+    // smtpmailer($email, 'dwwm.auboue@hotmail.com', $name, $objet , $msg);
 }
 
 

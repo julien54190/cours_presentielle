@@ -36,8 +36,9 @@ require_once('mail.php')
                     $select[0]['id'],
                     $_POST['email']
                 ));
-
-                SendEmail($select[0]['id'], $token, $_POST['email']);
+                //GenerateToken($length);
+                $msg = "Lien pour reinitialiser votre mot de passe : http://localhost:8888/presentielle/11.connexion/reset.php?id=" . $select[0]['id'] . "&token=$token";
+                SendEmail($_POST['email'], $msg, 'Rénitialisation du mot de passe', 'DWWM.fr');
             }
         }
     

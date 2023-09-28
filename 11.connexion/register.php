@@ -1,4 +1,6 @@
-<?php  require_once('../5.base_php/db.php') ?>
+<?php  require_once('../5.base_php/db.php');
+require_once('mail.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -45,6 +47,9 @@
                 $_POST['Genre'],
                 sha1($_POST['Password'])
             ));
+            $token = GenerateToken(50);
+            $msg = "Lien pour verifier votre adresse mail : http://localhost:8888/presentielle/11.connexion/verify.php?token=$token"; 
+            SendEmail($_POST['Mail'], $msg, "Validation Adresse Mail", "DWWM.fr");
             header("Location: login.php");
         } else {
             echo '<script> alert("Ce Pseudo ou E-mail est déja utilié") </script>';

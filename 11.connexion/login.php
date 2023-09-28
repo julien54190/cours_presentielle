@@ -35,11 +35,15 @@
         ));
         $select = $select->fetch(PDO::FETCH_ASSOC);
         if(!empty($select)) {
+            if ($select['Confirm']){
             $_SESSION = $select;
             header('location: index.php');
-        } else{
+            } else
+                echo "<script> alert('L\'adresse mail n'est pas verifier') </script>";
+            
+        } else
             echo "<script>alert('Le mot de passe ou le pseudo n\'est pas bon')</script>";
-        }
+        
         
     }
     ?>
