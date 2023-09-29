@@ -2,7 +2,11 @@
     session_start();
     if (!empty($_SESSION)) header('Location: index.php');
     if(!empty($_GET)) {
-        if($_GET['success'] == 'reset') echo '<script>alert("Votre mot de passe a été modifieé") </script>';
+        if (isset($_GET['sucess'])) {
+            if($_GET['success'] == 'reset') echo '<script>alert("Votre mot de passe a été modifieé") </script>';
+            if($_GET['success'] == 'mail') echo '<script>alert("Votre adresse est vérifiée, vous pouvez vous connecter.")</script>';
+
+        }
     }
 ?>
 <!DOCTYPE html>

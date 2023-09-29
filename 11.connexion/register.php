@@ -38,16 +38,19 @@ require_once('mail.php');
         $select-> execute(array($_POST['User'], $_POST['Mail']));
         $select = $select->fetchAll();
         if (empty($select)) {
-            $insert = $bdd->prepare('INSERT INTO Inscription(Name, Firstname, User, Mail, Genre, Password) VALUE (?, ?, ?, ?, ?, ?);');
+            $token = GenerateToken(50);
+
+            $insert = $bdd->prepare('INSERT INTO Inscription(Name, Firstname, User, Mail, Genre, Password, Token) VALUE (?, ?, ?, ?, ?, ?, ?);');
             $insert->execute(array(
                 $_POST['Name'],
                 $_POST['Firstname'],
                 $_POST['User'],
                 $_POST['Mail'],
                 $_POST['Genre'],
-                sha1($_POST['Password'])
+                sha1($_POST['Password']),
+                $token
             ));
-            $token = GenerateToken(50);
+            
             $msg = "Lien pour verifier votre adresse mail : http://localhost:8888/presentielle/11.connexion/verify.php?token=$token"; 
             SendEmail($_POST['Mail'], $msg, "Validation Adresse Mail", "DWWM.fr");
             header("Location: login.php");
