@@ -7,7 +7,8 @@
     <title>Inscription</title>
 </head>
 <body>
-    <?php include 'inc/herder.php'; ?>
+    <?php $_GET['page'] = 'register';
+    include 'inc/herder.php'; ?>
     <br><br><br><br>
 
     <form method="post">

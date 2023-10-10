@@ -1,4 +1,10 @@
-<?php require_once('bdd/dbcat.php') ?>
+<?php require_once('bdd/dbcat.php');
+    if (!empty($_SESSION)) {
+        session_unset();
+        session_destroy();
+        header('Location: index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,7 +13,8 @@
     <title>Connexion</title>
 </head>
 <body>
-    <?php include 'inc/herder.php'; ?>
+    <?php $_GET['page'] = 'login';
+    include 'inc/herder.php'; ?>
     <br><br><br><br>
 
     <form method='post'>
