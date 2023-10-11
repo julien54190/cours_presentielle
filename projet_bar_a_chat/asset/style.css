@@ -52,8 +52,8 @@ nav div box-icon[name="sun"] {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -100,11 +100,12 @@ form div a {
     color: white;
 }
 
-form input {
+form input, form select {
     text-align: center;
     width: 250px;
     font-size: 1.2em;
     height: 50px;
+    cursor: url('https://e7.pngegg.com/pngimages/172/297/png-clipart-cursor-cursor.png'), auto;
     border: 3px solid #191919;
     border-radius: 5px;
 }
@@ -115,9 +116,11 @@ form label {
 }
 
 form input[type="submit"] {
-    width: 150px;
+    width: 200px;
 }
-
+div span {
+    margin: 0 auto 0 auto;
+}
 textarea {
     resize: none;
 }

@@ -49,7 +49,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 
 
-//    header('Location: paneladmin.php'); 
+    header('Location: paneladmin.php'); 
 }
 
 
