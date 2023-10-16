@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('bdd/dbcat.php');
-
+ob_start()
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,21 +37,37 @@ require_once('bdd/dbcat.php');
         <div>
             <form method="post">
                 <h2>Faire une réservation (15 min)</h2>
+
+                <?php if (!empty($_SESSION) && $_SESSION['role'] > 0) :?>
+                    <label for="client">Client :</label>
+                    <select name="client" id="client">
+                        <?php
+                            $select = $bdd->prepare('SELECT * FROM Bar_a_chat');
+                            $select->execute();
+                            $select = $select->fetchAll();
+                            if (!empty($select)) {
+                                for ($i=0; $i < count($select); $i++) { // Je fait une boucle qui tourne le nombre de ligne récupérer
+                                    echo "<option value='" . $select[$i]['id'] . "'>" . $select[$i]['username'] . "</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                <?php endif;?>
+
                 <label for="cat">Chat :</label>
                 <select name="cat" id="catSelect" required>
                     <?php
-                        $select = $bdd->prepare('SELECT * FROM cat WHERE veto=0 AND transfer=0'); 
-                        // Je séléctionne toute les colonnes et les lignes qui on la colonne , veto et transfer à 0
+                        $selectCat = $bdd->prepare('SELECT * FROM cat WHERE veto=0 AND transfer=0'); 
+                        // Je séléctionne toute les colonnes et les lignes qui on la colonne veto et transfer à 0
                         $selectCat->execute();
-                        $selectCat = $select->fetchAll();
-                        if (!empty($select)) { // Je vérifie que j'ai des lignes qui ont était récuperer
-                            $selectRes = $bdd->prepare('SELECT * FROM reservation');
-                            $selectRes->execute();
-                            $selectRes = $selectRes->fetchAll();
-                            // for ($i=0; $i < count($select); $i++) { // Je fait une boucle qui tourne le nombre de ligne récupérer
-                            //     echo "<option value='" . $select[$i]['id'] . "'>" . $select[$i]['prenom'] . "</option>";
-                            // }
-                        }
+                        $selectCat = $selectCat->fetchAll();
+                        if (!empty($selectCat)) { // Je vérifie que j'ai des lignes qui ont était récuperer
+
+                                for ($i=0; $i < count($selectCat); $i++) { // Je fait une boucle qui tourne le nombre de ligne récupérer
+                                    echo "<option value='" . $selectCat[$i]['id'] . "'>" . $selectCat[$i]['prenom'] . "</option>";
+                                }
+                            }
+                            
                     ?>
                 </select>
                 <label for="table">N° Table :</label>
@@ -70,6 +86,9 @@ require_once('bdd/dbcat.php');
                     max="<?php echo date('Y-n')?>-<?php echo date('d')+7?>T18:59"
                 required> 
                 <script>
+                    ////////// Fonction Modification de mon input Date ////////////////
+                    // Ici je créer une fonction ChangeDate qui me permet de pouvoir gérer la validité de mon input 
+                    // Cette à dire pouvoir dire si mon formulaire peut être envoyé ou non
                     function ChangeDate() {
                         let Element = document.getElementById('date')
                         // Split est une fonction de JavaScript qui permet de découper une chaine de caractère
@@ -83,26 +102,22 @@ require_once('bdd/dbcat.php');
                         } else {
                             Element.setCustomValidity('')
                         }
-                        let tab = [
-                            00,
-                            15,
-                            30,
-                            45
-                        ]
-                         // let heure  = temporaire[1].split(':')[0]
-                        let minute = temporaire[1].split(':')[1]
-                        // let date = new Date(); // new Date est défini par JavaScript est récupère toute
-                        // // les informations du moment et d'aujourd'hui
+                        // let theo = [
+                        //     00,
+                        //     15,
+                        //     30,
+                        //     45
+                        // ]
+                        //  // let heure  = temporaire[1].split(':')[0]
+                        // let minute = temporaire[1].split(':')[1]
+                        // // let date = new Date(); // new Date est défini par JavaScript est récupère toute
+                        // // // les informations du moment et d'aujourd'hui
 
-                        theo.forEach(function(lavabo) {
-                            if (minute === lavabo) {
+                        // theo.forEach(function(lavabo) {
+                        //     if (minute === lavabo) {
                                 
-                            }
-                        })
-
-
+                        //     }
                         
-                
                     }
                 </script>
                     <!-- Ici je récupère la date d'aujourd'hui pour pouvoir définir value, min, max -->
@@ -114,23 +129,57 @@ require_once('bdd/dbcat.php');
 
         <?php 
         if (isset($_POST) && !empty($_POST)) {
-            // J'insert dans la base de donnée les inforamtions que je lui est donnée dans le formulaire
-            $insert = $bdd->prepare('INSERT INTO reservation(id_client, id_cat, date, comment, tab) VALUES (?, ?, ?, ?, ?)');
-            $insert->execute(array(
-                // Le (int) va passer la variable temporairement en entier 
-                (int)$_SESSION['id'],
-                (int)$_POST['cat'],
-                str_replace('T', ' ', $_POST['date']),
-                $_POST['comment'],
-                (int)$_POST['table']
+            ############## Partie Vérification dans la base donnée ##########
+            # Dans cette partie je regarde dans la base donnée toute les réservations qui ont l'id_cat qui est exactement
+            # Le même que le chat que j'ai séléctionné
+            # Pour faire ca j'ai utiliser une boucle foreach qui me permet de récupèrer les lignes d'un tableau
+            # Et j'ai regarder si le chat séléctionné été déjà réserver à l'heure que j'ai séléctionné
+
+            $verify = true;
+            $select = $bdd->prepare('SELECT * FROM reservation WHERE id_cat=?');
+            $select->execute(array(
+                $_POST['cat']
             ));
-            // $update = $bdd->prepare('UPDATE cat SET reserver=1 WHERE id=?');
-            // $update->execute(array(
-            //     (int)$_POST['cat']
-            // ));
-            header('Location: index.php');
-        }
+            $select = $select->fetchAll(); 
+            if (!empty($select)) {
+                // Le foreach récupère mon tableau $select et tourne en fonction de mon tableau en me donnant mon index du 
+                // Tableau avec ca valeur
+                foreach ($select as $index => $valeur) {
+                    // Je regarde si ma valeur qui ce trouve dans la base de donner et égale à la valeur
+                    // que j'ai rentré dans le formulaire mais avec le T qui à été remplacer par un espace
+
+                    //                                  2023-10-12 11:00:00
+                    if ($valeur['date'] == str_replace('T', ' ', $_POST['date']) . ':00') {
+                        $verify = false;
+                        break;
+                    }
+                }
+            }
+            
+            ########################################################################
+
+            #############   Partie Insertion ############
+            # Dans cette partie j'insers dans la base de donnée la reservation que j'ai séléctionner dans mon formulaire
+            # Que si la variable $verify que j'ai créer et qui est de type booléan est vrai (true) sinon j'affiche un message
+            # D'erreur
+            
+
+            if ($verify) {            
+                // J'insert dans la base de donnée les informations que je lui est donnée dans le formulaire
+                $insert = $bdd->prepare('INSERT INTO reservation(id_client, id_cat, date, comment, tab) VALUES (?, ?, ?, ?, ?)');
+                $insert->execute(array(
+                    // Le (int) va passer la variable temporairement en entier 
+                    empty($_POST['client']) ? (int)$_SESSION['id'] : $_POST['client'],
+                    (int)$_POST['cat'],
+                    str_replace('T', ' ', $_POST['date']),
+                    $_POST['comment'],
+                    (int)$_POST['table']
+                ));
     
+            } else {
+                echo "<script>alert('Ce chat est déjà résever pour cette horraire ! Donc reviens plus tôt la prochaine fois nullard') </script>";
+            }
+        }
         ?>
     <?php endif; ?>
 

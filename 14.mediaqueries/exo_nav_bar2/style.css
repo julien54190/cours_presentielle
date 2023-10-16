@@ -9,8 +9,9 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px;
+    padding: 10px;
     position: fixed;
+    bottom: 93.5%;
     top: 0; right: 0; left: 0;
 }
 
@@ -27,18 +28,12 @@ nav div {
     display: flex;
     align-items: center;
 }
-
 span {
     margin-left: 5px;
 }
-box-icon[name='menu'] {
+box-icon[name='menu'], box-icon[name='x'] {
     display: none;
 }
-
-box-icon[name='x'] {
-    display: none;
-}
-
 
 @media screen and (max-width: 950px) {
     nav ul {
@@ -47,5 +42,32 @@ box-icon[name='x'] {
     box-icon[name='menu'] {
         display: contents;
     }
+}
 
+.SwitchNav {
+    background-color: #000D1A;
+    bottom: 0;
+}
+.SwitchNav div box-icon, .SwitchNav span {
+    display: none;
+}
+
+.SwitchNav box-icon[name='x'] {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: block;
+}
+
+
+.SwitchNav ul {
+    margin: 0 auto 0 auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.SwitchNav ul li {
+    margin: 15px 0;
+    font-size: 1.4em;
 }
