@@ -251,6 +251,77 @@ echo Factorielle1(5)
         
         echo mb_strrev("Bonjour tout le monde");
         ?>
+        <br><br><br>
+        <?php
+            #Créer une fonction qui ce nomme Acronyme qui a comme parametre une chaine de caractère 
+            #et qui envoie que les initial des mot de la phrase.
 
- </html>
+            
+    function Acronyme($chaine) {
+    $tab_phrase = explode(' ', $chaine);
+
+    $initiales = "";
+
+    foreach ($tab_phrase as $mot) {
+        $initiales .= strtoupper($mot[0]);
+    }
+
+    return $initiales;
+}
+echo Acronyme("bonjour tout le monde comment ca va je vous emmerde")
+?>
+
+<br><br>
+
+<?php
+        # Créer une fonction AffichageTableau qui prend en argument un tableau et qui va devoir afficher un
+        # tableau en html sur notre page
+
+        $tab = [
+            'mdupond' => [
+                'prenom' => 'Martin',
+                'nom' => 'Dupond',
+                'age' => 25,
+                'ville' => 'Paris'
+            ],
+            'mduponds' => [
+                'prenom' => 'flo',
+                'nom' => 'pd',
+                'age' => 22,
+                'ville' => 'cul'
+            ]
+            ];
+
+        function AffichageTableau($tableau){
+            if (is_array($tableau) && !empty($tableau)) {
+                echo "<table>
+                    <tr>
+                        <th>Prenom :</th>
+                        <th>Nom :</th>
+                        <th>Age :</th>
+                        <th>Ville :</th>
+                    </tr>
+                    ";
+        }
+        foreach ($tableau as $index => $ligne) {
+            $prenom = $ligne['prenom'];
+            $nom = $ligne['nom'];
+            $age = $ligne['age'];
+            $ville = $ligne['ville'];
+
+            echo "
+            <tr id=$index>
+                <td>$prenom</td>
+                <td>$nom</td>
+                <td>$age</td>
+                <td>$ville</td>
+            </tr> 
+            ";
+        }
+        echo "</table>";
+    }
+        echo AffichageTableau($tab)
+?>
+
+</html>
 </body> 
